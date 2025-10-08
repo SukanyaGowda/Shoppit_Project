@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.text import slugify
 
 # Create your models here.
 class Product(models.Model):
@@ -20,7 +21,7 @@ class Product(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slung:
-            self.slung=slungify(self.name)
+            self.slung=slugify(self.name)
             unique_slug=self.slung
             counter=1
             if Product.objects.filter(slung=unique_slug).exists():
